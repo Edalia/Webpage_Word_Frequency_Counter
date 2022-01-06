@@ -30,13 +30,14 @@ require 'simple_html_dom.php';
     //remove punctuation and standardize the case of every word in string
     function standard_string($string){
         
-        //convert string to camelcase
-        $string = ucwords($string);
+        //convert string to lowercase
+        $string = strtolower($string);
 
         //keep letters and numbers
         $string = preg_replace('/[^a-z]+/i', ' ', $string);
 
-        return $string;
+        //return string in camelcase
+        return ucwords($string);
 
     }
 
@@ -63,33 +64,20 @@ require 'simple_html_dom.php';
     }
 
 
+    //merge paragraph array elements to single string
+    $paragraph_merge_string = join(" ",$link_html_page->find("p"));
 
-    $paragraph = $link_html_page->find('p',2);
-    $para_string = $paragraph->plaintext;
+    //add words from merged paragraph to array
+    $words_array = explode(" ",standard_string($paragraph_merge_string));
 
-    $words_array = explode(" ",standard_string($para_string));
+    //output single instances of words
+    foreach(array_unique($words_array) as $word){
 
-
-
-    foreach($words_array as $word){
-        echo $word."<br>";   
+         echo $word." ".word_frequency($words_array,$word)."<br>"; 
+                
     }
 
-    // for($i=0; $i<count($link_html_page->find("p")) ;$i++){
 
-    //     $para_string = $link_html_page->find("p",$i)->plaintext;
-
-    
-    //     $words_array = explode(" ",$para_string);
-
-    
-    //     print_r($string_array);
-
-    // }
-
-
-
-    
 //}
 
 
