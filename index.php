@@ -5,7 +5,7 @@
         <form action='downloadtext.php' method='post'>
             <input type='text' name='urlLink' required>
             <br>
-            <input type='submit' name='abc' placeholder='ac' />
+            <input type='submit' value='Check Words' />
         </form>
     </div>
 </body>

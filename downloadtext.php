@@ -3,12 +3,6 @@
 //external HTML DOM parser
 require 'simple_html_dom.php';
 
-if($_POST['urlLink'] != ""){
-    
-    $link_submit = 'https://en.wikipedia.org/wiki/'.$_POST['urlLink'];
-
-    $link_html_page = file_get_html($link_submit);
-    
     //remove punctuation and standardize the case of every word in string
     function standard_string($string){
         
@@ -17,6 +11,9 @@ if($_POST['urlLink'] != ""){
 
         //keep letters and numbers
         $string = preg_replace('/[^a-z]+/i', ' ', $string);
+
+        //remove single letter characters
+        $string = trim(preg_replace("/(^|\s+)(\S(\s+|$))+/", " ", $string));
 
         //return string in camelcase
         return ucwords($string);
@@ -45,24 +42,43 @@ if($_POST['urlLink'] != ""){
        
     }
 
-
-    //merge paragraph array elements to single string
-    $paragraph_merge_string = join(" ",$link_html_page->find("p"));
-
-
-    //add words from merged paragraph to array
-    $words_array = explode(" ",standard_string($paragraph_merge_string));
-
+//submission via url input
+if(isset($_POST['urlLink'])){
     
-    //output single instances of words
-    foreach(array_unique($words_array) as $word){
+    $link_submit = 'https://en.wikipedia.org/wiki/'.$_POST['urlLink'];
 
-         echo $word." ".word_frequency($words_array,$word)."<br>"; 
-                
+
+    $link_html_page = file_get_html($link_submit);
+    
+    //check if html page is found from search
+    if($link_html_page){
+        
+        //merge paragraph array elements to single string
+        $paragraph_merge_string = join(" ",$link_html_page->find("p"));
+
+        //start session variable to be used in wordlist.php
+        session_start();
+
+        //add words from merged paragraph to session array
+        $_SESSION['words_array'] = explode(" ",standard_string($paragraph_merge_string));
+
+        header("Location:wordlist.php");
+
+    }else{
+        echo "<script>
+                alert('Page not Found'); 
+                location.href= 'index.php';
+              </script>";
     }
+    
 
-    echo "Page :".$link_submit;
+}else{
+    // echo "False";
+}
 
+//submission via page upload
+if(isset($_POST['loadPage'])){
+    echo 'abc';
 }
 
 
