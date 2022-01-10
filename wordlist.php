@@ -28,7 +28,7 @@
                 
                     //check frequency of values and add to array - word(key), frequency(value)
                     $words_and_frequency =array_count_values($_SESSION['words_array']);
-
+               
                     //sort array in descending order based on value (frequency)
                     arsort($words_and_frequency);
 
@@ -39,6 +39,7 @@
                         <td><?php echo word_frequency($frequency); ?></td>
                     </tr>
                     
+
                 <?php }?>
             </tbody>
 

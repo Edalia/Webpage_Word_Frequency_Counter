@@ -23,13 +23,13 @@ require 'simple_html_dom.php';
     //check frequency of words in string array
     function word_frequency($frequency){
 
-            if($frequency == 1){
-                return "<b>unique</b>";
-            }else if($frequency > 1){
-                return "Present ".$frequency." times.";
-            }
-               
-    }
+        if($frequency == 1){
+            return "<b>unique</b>";
+        }else if($frequency > 1){
+            return "Present ".$frequency." times.";
+        }
+           
+}
 
     //extract words given the path/url of the web page
     function scrap_words($path){
