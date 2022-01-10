@@ -18,6 +18,8 @@ Tools used:
 
 ## Limitations
 The application can only extract words within a HTML (p) tag.
+The application does not differentiate between singular and plural words and may list them as different words.
+e.g the words "century" and "centuries" would be listed as 2 different words in a page.
 
 ## Features to be added
 -UI styling
