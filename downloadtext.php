@@ -21,25 +21,14 @@ require 'simple_html_dom.php';
     }
 
     //check frequency of words in string array
-    function word_frequency($array,$string){
+    function word_frequency($frequency){
 
-        $freq_values = array_count_values($array);
-        
-        //check if string exists in array
-        if (in_array( $string ,$array )){
-            $count = $freq_values[$string];
-
-            if($count == 1){
-                return "unique";
-            }else if($count > 1){
-                return $count;
+            if($frequency == 1){
+                return "<b>unique</b>";
+            }else if($frequency > 1){
+                return "Present ".$frequency." times.";
             }
-            
-         
-        }else{
-            return "Not present";
-        }
-       
+               
     }
 
     //extract words given the path/url of the web page

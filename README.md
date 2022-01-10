@@ -14,11 +14,11 @@ Tools used:
 
 
 ## Current Features
--HTML paragraph tag <p> scrapping, via URL search or file upload
+-HTML (p) paragraph tag scrapping, via URL search or file upload
 
 ## Limitations
-The application can only extract words within a HTML <p> tag.
+The application can only extract words within a HTML (p) tag.
 
 ## Features to be added
 -UI styling
--Scrapping words from other HTML tags besides <p>.
+-Scrapping words from other HTML tags besides(p).

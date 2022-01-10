@@ -26,13 +26,19 @@
             <tbody>
                 <?php 
                 
-                foreach(array_unique($_SESSION['words_array']) as $word){?>
+                    //check frequency of values and add to array - word(key), frequency(value)
+                    $words_and_frequency =array_count_values($_SESSION['words_array']);
 
+                    //sort array in descending order based on value (frequency)
+                    arsort($words_and_frequency);
+
+                    foreach(array_unique($words_and_frequency) as $word => $frequency){?>
+                    
                     <tr>
                         <td><?php echo $word; ?></td>
-                        <td><?php echo word_frequency($_SESSION['words_array'],$word)?></td>
+                        <td><?php echo word_frequency($frequency); ?></td>
                     </tr>
-
+                    
                 <?php }?>
             </tbody>
 
