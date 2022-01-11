@@ -1,3 +1,0 @@
--added ability to scrap an uploaded web page
--refined word scrapping to be performed by function(function takes argument to gather html file:can either be url or local path if uploaded)
--updated readme

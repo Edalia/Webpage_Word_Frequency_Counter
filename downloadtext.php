@@ -24,8 +24,11 @@ require 'simple_html_dom.php';
     function word_frequency($frequency){
 
         if($frequency == 1){
-            return "<b>unique</b>";
-        }else if($frequency > 1){
+            return "Appeared Once";
+        }if($frequency == 2){
+            return "Appeared twice";
+        }
+        else if($frequency > 2){
             return "Present ".$frequency." times.";
         }
            
@@ -62,7 +65,7 @@ require 'simple_html_dom.php';
 //submission via url input
 if(isset($_POST['urlLink'])){
     
-    $link_submit = 'https://en.wikipedia.org/wiki/'.$_POST['urlLink'];
+    $link_submit = "https://".$_POST['urlLink'];
 
     //scrap page using url
     scrap_words($link_submit);
