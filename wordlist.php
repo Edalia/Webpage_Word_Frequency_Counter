@@ -1,8 +1,14 @@
 <?php
   
   require 'downloadtext.php';
+  require_once("../Webpage_Word_Frequency_Counter/lib/detectlanguage.php");
+  use \DetectLanguage\DetectLanguage;
+
   session_start();
 
+  DetectLanguage::setApiKey('5b3994e0e15708a702331d26cfb89564');
+
+  
   if(isset($_SESSION['words_array'])){
 ?>
 
@@ -27,7 +33,7 @@
             <?php 
               //check frequency of values and add to array - word(key), frequency(value)
               $words_and_frequency =array_count_values($_SESSION['words_array']);
-                            
+              
               //sort array in descending order based on value (frequency)
               arsort($words_and_frequency);
 
@@ -45,6 +51,27 @@
     </div>
     <div class="col">
       The english words found were:
+      
+      <?php
+      //detect languages of words from $_SESSION['words_array']
+      $word_languages = DetectLanguage::detect($_SESSION['words_array']);
+      
+      echo var_dump($word_languages);
+
+
+
+
+      // foreach($_SESSION['words_array'] as $word_detect){
+        
+      //   //detect english words on the page
+      //   if(DetectLanguage::detect($word_detect) == "en"){
+      //     echo $word."<br>";
+      //   }else{
+          
+      //   }
+
+      // }
+      ?>
     </div> 
   </div>
 </div>

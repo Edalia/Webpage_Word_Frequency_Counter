@@ -3,7 +3,14 @@
 //external HTML DOM parser
 require 'simple_html_dom.php';
 
-    //remove punctuation and standardize the case of every word in string
+        
+    /**
+     * Remove punctuation and standardize the case of every word in string
+     * 
+     * @param string  string from paragraphs
+     * 
+     * @return string camelcase string
+     */
     function standard_string($string){
         
         //convert string to lowercase
@@ -20,7 +27,13 @@ require 'simple_html_dom.php';
 
     }
 
-    //check frequency of words in string array
+    /**
+     * Check frequency of words in string array
+     * 
+     * @param int frequency value
+     * 
+     * @return string frequency statement
+     */
     function word_frequency($frequency){
 
         if($frequency == 1){
@@ -34,7 +47,12 @@ require 'simple_html_dom.php';
            
 }
 
-    //extract words given the path/url of the web page
+    /**
+     *  Extract words given the path/url of the web page
+     * @param string web page $path
+     * 
+     */
+    
     function scrap_words($path){
         $link_html_page = file_get_html($path);
 
