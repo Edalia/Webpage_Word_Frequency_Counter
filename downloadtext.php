@@ -44,19 +44,31 @@ require 'simple_html_dom.php';
             //merge paragraph array elements to single string
             $paragraph_merge_string = join(" ",$link_html_page->find("p"));
 
-            //start session variable to be used in wordlist.php
-            session_start();
+            
+            //check if merged paragraphs are empty- no words found, returns empty string
+            if(empty($paragraph_merge_string)){
 
-            //add words from merged paragraph to session array
-            $_SESSION['words_array'] = explode(" ",standard_string($paragraph_merge_string));
+                echo "<script>
+                        alert('No words were found in any paragraph.Try a different web page'); 
+                        location.href= 'index.php';
+                      </script>";
 
-            header("Location:wordlist.php");
+            }else{
+
+                //start session variable to be used in wordlist.php
+                session_start();
+
+                //add words from merged paragraph to session array
+                $_SESSION['words_array'] = explode(" ",standard_string($paragraph_merge_string));
+                
+                header("Location:wordlist.php");
+            }
 
         }else{
             echo "<script>
                     alert('Page not Found'); 
                     location.href= 'index.php';
-                </script>";
+                  </script>";
         }
 
     }
@@ -65,21 +77,23 @@ require 'simple_html_dom.php';
 //submission via url input
 if(isset($_POST['urlLink'])){
     
-    $link_submit = "https://".$_POST['urlLink'];
+    //check if submitted URL has https:
+    if (strpos($_POST['urlLink'], "http") === 0) {
 
-    //scrap page using url
-    scrap_words($link_submit);
+        //scrap page using url
+        scrap_words($_POST['urlLink']);
 
-}else{
-    // echo "False";
+    }else{
+        //add https:// if URL lacks it
+        scrap_words("https://".$_POST['urlLink']);
+    }
 }
 
 //submission via page upload
 if(isset($_POST['uploadSubmit'])){
 
-    $local_path = "C:/wamp64/www/Webpage_Word_Frequency_Counter/";
-
-    $upload_directory = $local_path."fileuploads/";
+    
+    $upload_directory = "../Webpage_Word_Frequency_Counter/fileuploads/";
 
     //get file path
     $webpage_path = $upload_directory. basename($_FILES["uploadPage"]["name"]);
@@ -92,7 +106,6 @@ if(isset($_POST['uploadSubmit'])){
 
         //upload copy of file to directory
         copy($_FILES['uploadPage']['tmp_name'], $webpage_path);
-
 
         //scrap uploaded file
         scrap_words($webpage_path);
