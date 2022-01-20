@@ -2,6 +2,7 @@
 
 <div class="card-body">
                     <div class="row">
+                    <p class="card-text">Extracts words from a html page and lists the frequency of the words on the page.</p>
                         <div class="col">
                             <div class="card">
                                 <div class="card-body">
@@ -17,8 +18,7 @@
                                 </div>
                             </div>
                         </div>
-                            
-                            
+                        <b>OR</b>
                         <div class="col">
                             <div class="card">
                                 <div class="card-body">
